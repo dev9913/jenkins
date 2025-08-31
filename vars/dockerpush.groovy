@@ -1,5 +1,5 @@
 def call(String imgName, String tag) {
-    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred',
+    withCredentials([usernamePassword(credentialsId: 'DockerCred',
                                       usernameVariable: 'DOCKER_USER',
                                       passwordVariable: 'DOCKER_PASS')]) {
         sh """
