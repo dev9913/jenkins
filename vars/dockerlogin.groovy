@@ -1,7 +1,7 @@
 def call(String mydockerhubuser, String password) {
     echo "Docker login ..."
     sh """
-        docker login -u '${mydockerhubuser}'  -p '${password}'
+        echo '${password}' | docker login -u '${mydockerhubuser}' --password-stdin
     """
-    echo "Docker login Successfully."
+    echo " Docker login successful."
 }
