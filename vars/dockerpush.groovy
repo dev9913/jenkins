@@ -1,5 +1,10 @@
-def  call( String dockerUserName, String imgName,String tag){
-   echo "Pushing Docker image: ${dockerUserName}/${imgName}:${tag}"
-   sh " docker push ${dockerUserName}/${imgName}:${tag} " 
-   echo "Docker image pushed successfully."
+def call(String imgName, String tag) {
+    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred',
+                                      usernameVariable: 'DOCKER_USER',
+                                      passwordVariable: 'DOCKER_PASS')]) {
+        sh """
+            echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
+            docker push ${DOCKER_USER}/${imgName}:${tag}
+        """
+    }
 }
